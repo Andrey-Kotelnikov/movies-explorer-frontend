@@ -13,7 +13,7 @@ function AboutMe () {
 и&nbsp;дочь. Я&nbsp;люблю слушать музыку, а&nbsp;ещё увлекаюсь бегом. Недавно начал кодить. С&nbsp;2015 года работал в&nbsp;компании &laquo;СКБ Контур&raquo;. После того, как прошёл курс по&nbsp;веб-разработке, начал заниматься фриланс-заказами и&nbsp;ушёл с&nbsp;постоянной работы.</p>
         <a className='about-me__link' href='https://github.com/Andrey-Kotelnikov' target='_blank' rel='noreferrer'>Github</a>
         </div>
-        <img className='about-me__photo' src={photo} alt='фотография'/>
+        <img className='about-me__photo' src={photo} alt='фотография создателя'/>
       </div>
     </section>
   )

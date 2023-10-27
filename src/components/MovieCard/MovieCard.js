@@ -1,11 +1,11 @@
 import './MovieCard.css';
 import movie from '../../images/movie.webp'
 
-function MovieCard () {
+function MovieCard ({imageAlt}) {
   return (
     <section className='movie-card'>
       <div className='movie-card__image-container'>
-        <img className='movie-card__image' src={movie} alt=''/>
+        <img className='movie-card__image' src={movie} alt={imageAlt}/>
         <button className='movie-card__save-button'>Сохранить</button>
       </div>
       <div className='movie-card__info'>
