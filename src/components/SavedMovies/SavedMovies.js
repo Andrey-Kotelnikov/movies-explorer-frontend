@@ -5,10 +5,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import MovieCardList from '../MovieCardList/MovieCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies () {
+function SavedMovies ({openNav}) {
   return (
     <>
-      <Header />
+      <Header openNav={openNav} />
       <SearchForm />
       <MovieCardList />
       <Footer />

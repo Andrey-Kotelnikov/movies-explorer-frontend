@@ -83,7 +83,18 @@
   }
 }
 
+@media (max-width: 510px) {
+  .search-form__input-line {
+    display: none;
+  }
+
+  .search-form__button {
+    right: 19px;
+  }
+}
+
 @media (max-width: 425px) {
+
   .search-form {
     padding: 80px 10px 0;
   }
@@ -98,11 +109,11 @@
     left: 19px;
   }
 
-  .search-form__input-line {
+  /*.search-form__input-line {
     display: none;
-  }
+  }*/
 
-  .search-form__button {
+  /*.search-form__button {
     right: 19px;
-  }
+  }*/
 }

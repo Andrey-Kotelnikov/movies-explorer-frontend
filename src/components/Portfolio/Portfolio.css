@@ -56,6 +56,19 @@
   }
 }
 
+@media (max-width: 510px) {
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__site {
+    background-size: 10px 10px;
+    background-position: right 5px top 9px;
+  }
+}
+
 @media (max-width: 425px) {
   .portfolio {
     padding: 0 14px 70px;
@@ -70,14 +83,14 @@
     margin-top: 40px;
   }
 
-  .portfolio__site {
+  /*.portfolio__site {
     background-size: 10px 10px;
     background-position: right 5px top 9px;
-  }
+  }*/
 
-  .portfolio__link {
+  /*.portfolio__link {
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.72px;
-  }
+  }*/
 }

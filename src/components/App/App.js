@@ -17,19 +17,31 @@ import Navigation from '../Navigation/Navigation';
 import './App.css';
 
 
+
+
 function App() {
+  const [navOpened, setNavOpened] = React.useState(false);
+
+  function openNav() {
+    setNavOpened(true);
+  }
+
+  function closeNav() {
+    setNavOpened(false)
+  }
+
   return (
     <>
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/' element={<Main openNav={openNav}/>} />
+        <Route path='/movies' element={<Movies openNav={openNav} />} />
+        <Route path='/saved-movies' element={<SavedMovies openNav={openNav} />} />
+        <Route path='/profile' element={<Profile openNav={openNav} />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Register />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-      <Navigation />
+      <Navigation isOpen={navOpened} closeNav={closeNav} />
     </>
   )
 }

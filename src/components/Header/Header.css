@@ -3,8 +3,12 @@
   display: flex;
   align-items: center;
   height: 74px;
-  background: #F3C1F8;
+  background: #FFF;
   justify-content: space-between;
+}
+
+.header_color_pink {
+  background: #F3C1F8;
 }
 
 .logo {
@@ -13,7 +17,13 @@
   object-fit: contain;
 }
 
-.header__container {
+.header__nav-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.header__auth-container {
   display: flex;
   align-items: center;
   gap: 50px;
@@ -86,7 +96,7 @@
     display: block;
   }
 
-  .header__container {
+  .header__nav-container {
     display: none;
   }
 }

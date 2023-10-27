@@ -6,6 +6,13 @@
   background: #F5F5F5;
 }
 
+.techs__title {
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.72px;
+  padding-bottom: 28px;
+}
+
 .techs__subtitle {
   margin: 90px 0 26px;
   padding: 0;
@@ -92,7 +99,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 425px) {
   .techs {
     padding: 70px 18px;
   }

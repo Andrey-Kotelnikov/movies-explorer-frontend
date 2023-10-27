@@ -9,10 +9,10 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 
-function Main () {
+function Main ({openNav}) {
   return (
     <>
-      <Header />
+      <Header isMainPage={true} openNav={openNav} />
       <Promo/>
       <NavTab/>
       <AboutProject/>

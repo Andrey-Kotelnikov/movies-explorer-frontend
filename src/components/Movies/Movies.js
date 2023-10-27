@@ -6,10 +6,10 @@ import Preloader from '../Preloader/Preloader';
 import MovieCardList from '../MovieCardList/MovieCardList';
 import Footer from '../Footer/Footer';
 
-function Movies () {
+function Movies ({openNav}) {
   return (
     <>
-      <Header />
+      <Header openNav={openNav} />
       <SearchForm />
       {/*<Preloader />*/}
       <MovieCardList />

@@ -25,12 +25,14 @@
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 510px) {
   .filter-checkbox {
     right: auto;
     top: 117px;
   }
+}
 
+@media (max-width: 425px) {
   .filter-checkbox__text {
     font-size: 11px;
   }
