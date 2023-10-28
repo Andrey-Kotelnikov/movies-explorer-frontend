@@ -28,7 +28,6 @@ function Header ({ isMainPage, openNav }) {
             <Link to='/signup' className='header__auth-button'>Регистрация</Link>
             <Link to='/signin' className='header__auth-button header__auth-button_major'>Войти</Link>
           </nav>
-
         </div>
       )}
     </header>
