@@ -71,5 +71,5 @@ class MainApi {
   }
 }
 
-//export const mainApi = new MainApi({baseURL: 'http://localhost:3003'});
-export const mainApi = new MainApi('https://api.movier.nomoredomainsrocks.ru');
+export const mainApi = new MainApi({baseURL: 'http://localhost:3003'});
+//export const mainApi = new MainApi('https://api.movier.nomoredomainsrocks.ru');

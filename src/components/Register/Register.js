@@ -24,7 +24,7 @@ function Register ({registration}) {
     console.log(name, email, password)
     registration(name, email, password)
       .then(resetForm())
-      .catch(err => setFormError(err.message));
+      .catch(err => setFormError(err));
   }
 
   return (

@@ -65,6 +65,28 @@ function App() {
 
   const { isScreenS, isScreenM, isScreenL } = useResize();
 
+
+  // Проверка наличия токена
+  function tokenCheck () {
+    getContent().then((res) => {
+      const userData = {
+        name: res.data.name,
+        email: res.data.email
+      };
+      setUserData(userData);
+      setLoggedIn(true);
+    })
+      .catch((err) => {
+        console.log(err);
+        setLoggedIn(false);
+      }) 
+  }
+  
+  // Запуск проверки токена при загрузке сайта
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
+
   React.useEffect(() => {
     if (isScreenL) {
       setInitialCards(12);
@@ -163,7 +185,7 @@ function App() {
         }
         setCurrentUser({name, email})
       })
-      .catch(err => console.log(err));
+      //.catch(err => console.log(err));
   }
 
   // Аутентификация
@@ -175,7 +197,7 @@ function App() {
           navigate('/movies', {replace: true});
         }
       })
-      .catch(err => console.log(err));
+      //.catch(err => console.log(err));
   }
 
   // Выход из аккаунта

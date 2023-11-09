@@ -26,7 +26,7 @@ function Login ({authentication}) {
     const { email, password } = values;
     authentication(email, password)
       .then(resetForm())
-      .catch(err => setFormError(err.message));
+      .catch(err => setFormError(err));
   }
 
   return (
