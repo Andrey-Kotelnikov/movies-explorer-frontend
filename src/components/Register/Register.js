@@ -1,33 +1,46 @@
 import './Register.css';
 import logo from '../../images/logo.svg';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { FormValidation } from '../FormValidation/FormValidation';
+import FormInput from '../FormInput/FormInput';
+import { registerInputs } from '../../utils/constants';
 
-function Register () {
+function Register ({registration}) {
+  const [formError, setFormError] = React.useState('');
+
+  const {
+    values,
+    errors,
+    isValid,
+    handleChange,
+    resetForm
+  } = FormValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setFormError('');
+    const { name, email, password } = values
+    console.log(name, email, password)
+    registration(name, email, password)
+      .then(resetForm())
+      .catch(err => setFormError(err.message));
+  }
+
   return (
     <div className='container'>
-      <form className='form'>
+      <form className='form' name='register' onSubmit={handleSubmit} noValidate>
         <Link to='/'>
           <img className='logo' src={logo} alt='Логотип'/>
         </Link>
         <h3 className='form__title'>Добро пожаловать!</h3>
         <div className='form__content'>
-          <label className='form__input-container'>
-            <h4 className='form__input-title'>Имя</h4>
-            <input className='form__input'/>
-            <span className='form__input-error'>что-то не так</span>
-          </label>
-          <label className='form__input-container'>
-            <h4 className='form__input-title'>E-mail</h4>
-            <input className='form__input'/>
-            <span className='form__input-error'></span>
-          </label>
-          <label className='form__input-container'>
-            <h4 className='form__input-title'>Пароль</h4>
-            <input className='form__input'/>
-            <span className='form__input-error'></span>
-          </label>
+          {registerInputs.map((input) => (
+            <FormInput key={input.id} {...input} values={values} errors={errors} handleChange={handleChange} />
+          ))}
         </div>
-        <button className='form__button'>Зарегистрироваться</button>
+        <span className='form__error'>{formError}</span>
+        <button className='form__button' disabled={!isValid}>Зарегистрироваться</button>
         <div className='form__link-container'>
           <p className='form__text'>Уже зарегистрированы?</p>
           <Link to='/signin' className='form__link'>Войти</Link>

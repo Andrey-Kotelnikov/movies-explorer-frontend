@@ -1,11 +1,13 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox () {
+function FilterCheckbox ({ activeCheckbox, toggleCheckbox }) {
+
+  //console.log('чек внутри компонента ' + activeCheckbox)
   return (
-    <section className='filter-checkbox'>
-      <button className='filter-checkbox__button'></button>
+    <div className='filter-checkbox'>
+      <button className={`${activeCheckbox ? 'filter-checkbox__button' : 'filter-checkbox__button_off'}`} type='button' onClick={toggleCheckbox}></button>
       <article className='filter-checkbox__text'>Короткометражки</article>
-    </section>
+    </div>
   )
 }
 

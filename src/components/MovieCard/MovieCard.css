@@ -19,6 +19,10 @@
   box-sizing: border-box;
 }*/
 
+.movie-card__link {
+  display: block;
+}
+
 .movie-card__image {
   width: 100%;
   height: 100%;
@@ -79,6 +83,19 @@
   line-height: 9px;
   cursor: pointer;
   z-index: 1;
+}
+
+.movie-card__save-button_type_saved {
+  display: block;
+  background: url(../../images/saved-icon.svg);
+  width: 21px;
+  height: 21px;
+}
+
+.movie-card__save-button_type_delete {
+  background: url(../../images/delete-icon.svg);
+  width: 21px;
+  height: 21px;
 }
 
 @media (max-width: 768px) {
