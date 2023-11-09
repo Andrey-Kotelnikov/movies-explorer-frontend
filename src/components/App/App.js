@@ -44,7 +44,8 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const locationSavedMovies = location.pathname === '/saved-movies';
-
+  const locationMovies = location.pathname === '/movies';
+  const locationProfile = location.pathname === '/profile';
   
   const [savedMovies, setSavedMovies] = React.useState([]);
 
@@ -75,6 +76,9 @@ function App() {
       };
       setUserData(userData);
       setLoggedIn(true);
+      //if (locationMovies) {navigate('/movies', {replace: true})};
+      //if (locationSavedMovies) {navigate('/saved-movies', {replace: true})};
+      //if (locationProfile) {navigate('/profile', {replace: true})};
     })
       .catch((err) => {
         console.log(err);
@@ -354,9 +358,10 @@ function App() {
 
   // Удаление сохраненного фильма
   function deleteMovie(dataMovie) {
-    console.log(dataMovie);
+    //console.log(dataMovie);
     mainApi.deleteMovie(dataMovie._id)
       .then((deletedMovie) => {
+        console.log(deletedMovie)
         setSavedMovies((movies) => movies.filter(item => item.movieId !== deletedMovie.movieId));
         setSavedMoviesFilteredName((movies) => movies.filter(item => item.movieId !== deletedMovie.movieId));
         setResultSavedMovies((movies) => movies.filter(item => item.movieId !== deletedMovie.movieId));

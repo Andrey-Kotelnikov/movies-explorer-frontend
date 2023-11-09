@@ -3,8 +3,8 @@ export const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 
 export const SCREEN_S = 480;
-export const SCREEN_M = 768;
-export const SCREEN_L = 1280;
+export const SCREEN_M = 629;
+export const SCREEN_L = 1009;
 
 
 
