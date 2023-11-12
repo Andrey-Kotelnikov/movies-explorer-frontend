@@ -42,6 +42,7 @@ function Movies ({
           savedMovies={savedMovies}
           showMoreCards={showMoreCards}
           isHiddenMoreButton={isHiddenMoreButton}
+          //moviesError={moviesError}
         />
       </main>
       <Footer />

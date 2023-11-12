@@ -24,9 +24,9 @@ function SavedMovies ({
       <Header openNav={openNav} loggedIn={loggedIn} />
       <SearchForm submitHandler={submitHandler} toggleCheckbox={toggleCheckbox} activeCheckbox={activeCheckbox} searchError={searchError} />
       <div className='movies__container'>
-          <p className='movies__text'>{moviesError}</p>
-        </div>
-      <MovieCardList movies={savedMovies} savedMovies={savedMovies} deleteMovie={deleteMovie} />
+        <p className='movies__text'>{moviesError}</p>
+      </div>
+      <MovieCardList movies={savedMovies} savedMovies={savedMovies} deleteMovie={deleteMovie} /*moviesError={moviesError}*/ />
       <Footer />
     </>
   )

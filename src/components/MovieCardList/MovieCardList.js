@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import React from 'react';
 import { useResize } from '../../utils/useResize';
 
-function MovieCardList ({ movies, saveMovie, savedMovies, deleteMovie, /*showMoreCards, isHiddenMoreButton*/ }) {
+function MovieCardList ({ movies, saveMovie, savedMovies, deleteMovie, /*moviesError*/}) {
   const location = useLocation();
   const locationOfSavedMovies = location.pathname === '/saved-movies';
 
@@ -13,6 +13,7 @@ function MovieCardList ({ movies, saveMovie, savedMovies, deleteMovie, /*showMor
 
   const [amountMovies, setAmountMovies] = React.useState(0);
   const [addedMovies, setAddedMovies] = React.useState(0);
+  const moviesError = false
 
 
   // Количество фильмов на странице в зависимости от ширины экрана
@@ -39,24 +40,30 @@ function MovieCardList ({ movies, saveMovie, savedMovies, deleteMovie, /*showMor
 
   return (
     <section className='movie-card-list'>
-      <div className='movie-card-list__container'>
-        {movies.map((movieElement, index) => {
-          if (index < amountMovies) {
-            return(
-              <MovieCard
-                key={ locationOfSavedMovies ? movieElement.movieId : movieElement.id}
-                {...movieElement}
-                movie={movieElement}
-                savedMovies={savedMovies}
-                saveMovie={saveMovie}
-                deleteMovie={deleteMovie}
-                locationOfSavedMovies={locationOfSavedMovies}
-              />
-            );
-          }
-          return null;
-        })}
-      </div>
+      {moviesError ? (
+        <div className='movies__container'>
+          <p className='movies__text'>{moviesError}</p>
+        </div>
+      ) : (
+        <div className='movie-card-list__container'>
+          {movies.map((movieElement, index) => {
+            if (index < amountMovies) {
+              return(
+                <MovieCard
+                  key={ locationOfSavedMovies ? movieElement.movieId : movieElement.id}
+                  {...movieElement}
+                  movie={movieElement}
+                  savedMovies={savedMovies}
+                  saveMovie={saveMovie}
+                  deleteMovie={deleteMovie}
+                  locationOfSavedMovies={locationOfSavedMovies}
+                />
+              );
+            }
+            return null;
+          })}
+        </div>
+      )}
       {isVisibleButton && <button className='movie-card-list__button' type='button' onClick={showMoreMovies}>Еще</button>}
     </section>
   )

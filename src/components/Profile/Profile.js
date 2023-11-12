@@ -10,7 +10,7 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
 
   const [isSaving, setIsSaving] = React.useState(false);
   
-  const [requestError, setRequestError] = React.useState('');
+  const [requestMessage, setRequestMessage] = React.useState('');
   const [success, setSuccess] = React.useState(false);
 
   const { name, email } = currentUser;
@@ -29,7 +29,7 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
   // Обработчик сабмита
   function handleSubmit(e) {
     e.preventDefault();
-    setRequestError('');
+    setRequestMessage('');
     setSuccess(false);
     
     console.log(profileName, profileEmail)
@@ -38,10 +38,9 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
         setCurrentUser({name: profileName, email: profileEmail})
         setIsSaving(false);
         setSuccess(true);
-        setRequestError('Аккаунт обновлен');
-        
+        setRequestMessage('Аккаунт обновлен');
       })
-      .catch((err) => setRequestError(err))
+      .catch((err) => setRequestMessage(err))
     //setIsSaving(false);
   }
 
@@ -98,11 +97,11 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
             <span className='profile__input-error'>{errors['profileEmail']}</span>
           </div>
         </form>
-        <span className={`profile__request-error ${success && 'profile__request-error_no-error'}`}>{requestError}</span>
+        <span className={`profile__request-error ${success && 'profile__request-error_no-error'}`}>{requestMessage}</span>
         {!isSaving ? (
           <button className='profile__button-edit' onClick={toggleButton}>Редактировать</button>
         ) : (
-          <button className={`profile__button-save ${isDisabled() ? 'profile__button-save_disabled' : ''}`} type='submit' onClick={handleSubmit}>Сохранить</button>
+          <button className='profile__button-save' type='submit' disabled={isDisabled()} onClick={handleSubmit}>Сохранить</button>
         )}
         {!isSaving && (
           <button className='profile__button profile__button-exit' onClick={handleLogout}>Выйти из аккаунта</button>

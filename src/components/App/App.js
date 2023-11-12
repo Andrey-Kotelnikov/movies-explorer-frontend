@@ -191,8 +191,6 @@ function App() {
     localStorage.setItem('checkbox', !activeCheckbox);
   }
 
-  
-
   // Обработчик поиска
   async function handleSearchSubmit(inputValue) {
     const allMoviesFromLS = JSON.parse(localStorage.getItem('allMovies'));
@@ -238,35 +236,14 @@ function App() {
     } else {
       setResultMovies(moviesFilteredName);
     }
-  }, [moviesFilteredName, activeCheckbox, /*initialCards*/])
-
-  /*React.useEffect(() => {
-    setMoviesShow(resultMovies.slice(0, countMoviesShow));
-  }, [resultMovies])*/
-
-
+    console.log({'resultMovies': resultMovies})
+  }, [moviesFilteredName, activeCheckbox])
 
 
   // Появление Ничего не найдено
   React.useEffect(() => {
-    if (resultMovies.length === 0 && allMovies.length !== 0 && !isLoading) {
-      setMoviesError("Ничего не найдено");
-    }
-  }, [resultMovies, allMovies]);
-
-
-
-
-
-
-  // Сохранение фильма
-  function saveMovie(dataMovie) {
-    mainApi.createSavedMovie(dataMovie)
-      .then((movie) => {
-        setSavedMovies([movie, ...savedMovies])
-      })
-      .catch(err => console.log(err));
-  }
+    resultMovies.length === 0 ? setMoviesError('Ничего не найдено') : setMoviesError('');
+  }, [resultMovies, activeCheckbox]);
 
   const [savedMoviesFilteredName, setSavedMoviesFilteredName] = React.useState([]);
   const [resultSavedMovies, setResultSavedMovies] = React.useState([]);
@@ -276,7 +253,7 @@ function App() {
 
   // Загрузка сохраненных фильмов
   React.useEffect(() => {
-    if (locationSavedMovies) {
+    /*if (locationSavedMovies) {
       mainApi.getSavedMovies()
         .then((res) => {
           setSavedMovies(res);
@@ -284,8 +261,29 @@ function App() {
           setSavedMoviesFilteredName(res);
         })
         .catch(err => console.log(err));
+    }*/
+    mainApi.getSavedMovies()
+      .then((res) => {
+        setSavedMovies(res);
+        setResultSavedMovies(res);
+        setSavedMoviesFilteredName(res);
+      })
+      .catch(err => console.log(err));
+  }, [/*locationSavedMovies*/]);
+
+  // Сохранение фильма или его удаление 
+  function saveMovie(dataMovie) {
+    const foundMovie = savedMovies.find((movie) => movie.movieId === dataMovie.movieId);
+    if(foundMovie) {
+      deleteMovie(foundMovie);
+    } else {
+      mainApi.createSavedMovie(dataMovie)
+        .then((movie) => {
+          setSavedMovies([movie, ...savedMovies])
+        })
+        .catch(err => console.log(err));
     }
-  }, [locationSavedMovies]);
+  }
 
   // Удаление сохраненного фильма
   function deleteMovie(dataMovie) {
@@ -298,9 +296,6 @@ function App() {
       })
       .catch(err => console.log(err));
   }
-
-  
-
 
   // Обработчик поиска на странице сохраненных фильмов
   function handleSearchSubmitSavedMovies(inputValue) {
@@ -326,16 +321,10 @@ function App() {
     setActiveCheckboxOnSavedMovies(checked => !checked);
   };
 
-   // Появление Ничего не найдено на сохраненных фильмах
-   React.useEffect(() => {
-    if (resultSavedMovies.length === 0 && savedMovies.length !== 0 && !isLoading) {
-      setSavedMoviesError("Ничего не найдено");
-    } else {
-      setSavedMoviesError('');
-    }
-  }, [resultSavedMovies, savedMovies]);
-
-
+  // Появление Ничего не найдено на сохраненных фильмах
+  React.useEffect(() => {
+    resultSavedMovies.length === 0 ? setSavedMoviesError('Ничего не найдено') : setSavedMoviesError('');
+  }, [resultSavedMovies, activeCheckboxOnSavedMovies]);
 
   return (
     <CurrentUserContext.Provider value={{currentUser, setCurrentUser}}>
