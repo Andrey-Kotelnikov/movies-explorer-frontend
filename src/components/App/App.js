@@ -251,25 +251,29 @@ function App() {
   const [activeCheckboxOnSavedMovies, setActiveCheckboxOnSavedMovies] = React.useState(false);
   const [savedMoviesError, setSavedMoviesError] = React.useState('');
 
-  // Загрузка сохраненных фильмов
-  React.useEffect(() => {
-    /*if (locationSavedMovies) {
-      mainApi.getSavedMovies()
-        .then((res) => {
-          setSavedMovies(res);
-          setResultSavedMovies(res);
-          setSavedMoviesFilteredName(res);
-        })
-        .catch(err => console.log(err));
-    }*/
-    mainApi.getSavedMovies()
+  // Функция загрузки сохр фильмов
+  function loadSavedMovies () {
+    return mainApi.getSavedMovies()
       .then((res) => {
         setSavedMovies(res);
         setResultSavedMovies(res);
         setSavedMoviesFilteredName(res);
       })
       .catch(err => console.log(err));
-  }, [/*locationSavedMovies*/]);
+  }
+
+  // Загрузка сохраненных фильмов при монтировании
+  React.useEffect(() => {
+    loadSavedMovies();
+  }, []);
+
+  // Загрузка сохраненных фильмов на стр сохраненных фильмов
+  React.useEffect(() => {
+    if (locationSavedMovies) {
+      loadSavedMovies()
+    }
+  }, [locationSavedMovies]);
+
 
   // Сохранение фильма или его удаление 
   function saveMovie(dataMovie) {
