@@ -102,7 +102,7 @@ cursor: pointer;
   cursor: pointer;
 }
 
-.profile__button-save:disabled {
+.profile__button-save_disabled {
   background: #F8F8F8;
   color: #C2C2C2;
   cursor: default;

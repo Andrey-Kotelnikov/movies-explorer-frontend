@@ -1,13 +1,14 @@
 import './Register.css';
 import logo from '../../images/logo.svg';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FormValidation } from '../FormValidation/FormValidation';
 import FormInput from '../FormInput/FormInput';
 import { registerInputs } from '../../utils/constants';
 
-function Register ({registration}) {
+function Register ({registration, loggedIn}) {
   const [formError, setFormError] = React.useState('');
+  const navigate = useNavigate();
 
   const {
     values,
@@ -16,6 +17,12 @@ function Register ({registration}) {
     handleChange,
     resetForm
   } = FormValidation();
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      navigate('/movies', {replace: true});
+    }
+  })
 
   function handleSubmit(e) {
     e.preventDefault();

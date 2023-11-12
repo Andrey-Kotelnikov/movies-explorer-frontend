@@ -1,9 +1,6 @@
 import './MovieCard.css';
 
 function MovieCard ({
-  //nameRU,
-  //image,
-  //duration,
   movie,
   savedMovies,
   saveMovie,
@@ -13,10 +10,6 @@ function MovieCard ({
 }) {
 
   const isSavedMovie =  Array.from(savedMovies).some(movie => movie.movieId === props.id);
-  //console.log('isSaved ' + isSavedMovie)
-  //console.log(savedMovies)
-  //console.log(movie.movieId)
-  //console.log(props)
 
   function correctionDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -65,7 +58,6 @@ function MovieCard ({
     } else {
       saveMovie(dataMovie);
     }
-    //console.log(props)
   }
 
   return (

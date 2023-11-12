@@ -6,14 +6,14 @@ import { NAME_REGEX, EMAIL_REGEX } from '../../utils/constants';
 import { FormValidation } from '../FormValidation/FormValidation';
 
 function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const {currentUser, setCurrentUser} = React.useContext(CurrentUserContext);
 
   const [isSaving, setIsSaving] = React.useState(false);
   
   const [requestError, setRequestError] = React.useState('');
   const [success, setSuccess] = React.useState(false);
 
-  const { name, email } = currentUser.data;
+  const { name, email } = currentUser;
 
   const { values, errors, isValid, handleChange, resetForm } = FormValidation();
 
@@ -22,7 +22,7 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
 
   React.useEffect(() => {
     resetForm({profileName: name, profileEmail: email})
-  }, [currentUser]);
+  }, [name, email]);
 
 
 
@@ -35,9 +35,11 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
     console.log(profileName, profileEmail)
     updateProfile(profileName, profileEmail)
       .then((res) => {
+        setCurrentUser({name: profileName, email: profileEmail})
         setIsSaving(false);
         setSuccess(true);
         setRequestError('Аккаунт обновлен');
+        
       })
       .catch((err) => setRequestError(err))
     //setIsSaving(false);
@@ -49,32 +51,15 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
   }
 
 
-  /*function isDisabled() {
-    if (name === nameProfile && email === emailProfile) {
+  function isDisabled() {
+    if (name === profileName && email === profileEmail) {
       return true;
     } else {
-      return !isValidInputs;
+      return !isValid;
     };
-  };*/
+  };
 
-  /*function handleSubmit(e) {
-
-    e.preventDefault();
-    setErrorServer("");
-    setSuccessUpdate(false)
-
-    onUpdateProfile( nameProfile, emailProfile )
-    .then((res) => {
-      setSuccessUpdate(true);
-      setErrorServer("Аккаунт успешно обновлен");
-    })
-    .then((res) => {
-      resetForm();
-    })
-    .catch((err) => {
-      setErrorServer(err);
-    })
-  };*/
+  
   
   return (
     <>
@@ -114,8 +99,14 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
           </div>
         </form>
         <span className={`profile__request-error ${success && 'profile__request-error_no-error'}`}>{requestError}</span>
-        {!isSaving ? <button className='profile__button-edit' onClick={toggleButton}>Редактировать</button> : <button className='profile__button-save' type='submit' disabled={!isValid} onClick={handleSubmit}>Сохранить</button>}
-        {!isSaving && <button className='profile__button profile__button-exit' onClick={handleLogout}>Выйти из аккаунта</button>}
+        {!isSaving ? (
+          <button className='profile__button-edit' onClick={toggleButton}>Редактировать</button>
+        ) : (
+          <button className={`profile__button-save ${isDisabled() ? 'profile__button-save_disabled' : ''}`} type='submit' onClick={handleSubmit}>Сохранить</button>
+        )}
+        {!isSaving && (
+          <button className='profile__button profile__button-exit' onClick={handleLogout}>Выйти из аккаунта</button>
+        )}
       </main>
     </>
   )

@@ -1,13 +1,13 @@
 import React from 'react';
 import './Login.css';
 import logo from '../../images/logo.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loginInputs } from '../../utils/constants';
 import FormInput from '../FormInput/FormInput';
 import { FormValidation } from '../FormValidation/FormValidation';
 import { login } from '../../utils/Auth';
 
-function Login ({authentication}) {
+function Login ({authentication, loggedIn }) {
   const [formError, setFormError] = React.useState('');
 
   const {
@@ -19,6 +19,12 @@ function Login ({authentication}) {
   } = FormValidation();
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      navigate('/movies', {replace: true});
+    }
+  })
 
   function handleSubmit(e) {
     e.preventDefault();

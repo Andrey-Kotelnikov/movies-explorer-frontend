@@ -110,6 +110,10 @@
   .movie-card__duration {
     margin-right: 0;
   }
+
+  .movie-card__save-button {
+    display: block;
+  }
 }
 
 @media (max-width: 425px) {
