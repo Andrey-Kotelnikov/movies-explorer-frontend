@@ -7,7 +7,8 @@ class MainApi {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(res.message);
+    return Promise.reject(`Ошибка: ${res.status}`);
+    //return Promise.reject(res.message);
   }
 
   // Зазрузка сохраненных фильмов

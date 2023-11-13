@@ -160,7 +160,7 @@ function App() {
   function updateProfile(name, email) {
     return mainApi.updateUser({ name, email })
       .then(user => setCurrentUser(user))
-      .catch(err => console.log(err));
+      //.catch(err => console.log(err));
   }
 
   // Открытие окна навигации

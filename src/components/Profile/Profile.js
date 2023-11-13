@@ -35,12 +35,13 @@ function Profile ({openNav, loggedIn, updateProfile, handleLogout}) {
     console.log(profileName, profileEmail)
     updateProfile(profileName, profileEmail)
       .then((res) => {
+        console.log(res)
         setCurrentUser({name: profileName, email: profileEmail})
         setIsSaving(false);
         setSuccess(true);
         setRequestMessage('Аккаунт обновлен');
       })
-      .catch((err) => setRequestMessage(err))
+      .catch((err) => setRequestMessage(err));
     //setIsSaving(false);
   }
 
