@@ -3,15 +3,14 @@ import logo from '../../images/logo.svg';
 import LinkProfile from '../LinkProfile/LinkProfile';
 import Navigation from '../Navigation/Navigation';
 import { Link, NavLink } from 'react-router-dom';
-const isLoggedIn = true;
 
-function Header ({ isMainPage, openNav }) {
+function Header ({ isMainPage, openNav, loggedIn }) {
   return (
     <header className={`header ${isMainPage ? 'header_color_pink' : ''}`}>
       <Link to='/'>
         <img className='logo' src={logo} alt='Логотип'/>
       </Link>
-      {isLoggedIn ? (
+      {loggedIn ? (
         <>
           <div className='header__nav-container'>
             <nav className='header__nav'>
@@ -28,6 +27,7 @@ function Header ({ isMainPage, openNav }) {
             <Link to='/signup' className='header__auth-button'>Регистрация</Link>
             <Link to='/signin' className='header__auth-button header__auth-button_major'>Войти</Link>
           </nav>
+
         </div>
       )}
     </header>
